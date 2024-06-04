@@ -43,10 +43,6 @@ def get_item(request, item_id):
     name = ''
     quantity = ''
     
-    product = f'''
-                 <i>Название:</i><strong> {name}</strong><br>
-                 <i>Количество:</i><strong> {quantity}</strong><br>
-              '''
     product_404 = f'''
                      <i>Товар с id {item_id}</i><strong> не найден!</strong><br>
                   '''
@@ -55,14 +51,16 @@ def get_item(request, item_id):
               '''
 
     for item in items:
-        print (item["id"])
-        print (item_id)
         if item["id"] == item_id:
             name = item["name"]
             quantity = item["quantity"]
-            return HttpResponse (product)
-#        else:
-        return HttpResponse (product_404)
+            product = f'''
+                         <i>Название:</i><strong> {name}</strong><br>
+                         <i>Количество:</i><strong> {quantity}</strong><br>
+                      '''
+            return HttpResponse ('%s%s' % (product, go_back) )
+
+    return HttpResponse ('%s%s' % (product_404, go_back) )
 
 
 ## 5 WORK
