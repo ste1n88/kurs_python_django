@@ -18,6 +18,18 @@ items = [
             {"id": 8, "name": "Кепка Montana" ,"quantity":124},
         ]
 
+#name = ''
+#quantity = ''
+#
+#product = f'''
+#             <i>Название:</i><strong> {name}</strong><br>
+#             <i>Количество:</i><strong> {quantity}</strong><br>
+#          '''
+#product_404 = f'''
+#                 <i>Товар с id {item_id}</i><strong> не найден!</strong><br>
+#              '''
+
+
 ## 1
 def home(request):
     text = '''<h1>"Изучаем Джанго" </h1>
@@ -35,8 +47,50 @@ def about(request):
                  '''
     return HttpResponse(about_info)
 
-## 3
-def get_item(request):
-    item = 5
-    print (request.data)
-    return HttpResponseRedirect(reverse("items", args=(items,)))
+## 3 4
+def get_item(request, item_id):
+
+    name = ''
+    quantity = ''
+    
+    product = f'''
+                 <i>Название:</i><strong> {name}</strong><br>
+                 <i>Количество:</i><strong> {quantity}</strong><br>
+              '''
+    product_404 = f'''
+                     <i>Товар с id {item_id}</i><strong> не найден!</strong><br>
+                  '''
+
+
+    for item in items:
+        print (item["id"])
+        print (item_id)
+        if item["id"] == item_id:
+            name = item["name"]
+            quantity = item["quantity"]
+            return HttpResponse (product)
+        else:
+            return HttpResponse (product_404)
+
+
+## 5
+def get_items(request, ):
+
+    name = ''
+    quantity = ''
+
+    product = f'''
+                 <i>Название:</i><strong> {name}</strong><br>
+                 <i>Количество:</i><strong> {quantity}</strong><br>
+              '''
+
+    html = []
+
+    for item in items:
+        name = item["name"]
+        quantity = item["quantity"]
+        #''.join([html, product,])
+        html+=product
+
+    print (html)
+    return HttpResponse (html)
