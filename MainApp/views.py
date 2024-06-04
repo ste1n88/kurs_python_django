@@ -37,7 +37,7 @@ def about(request):
                  '''
     return HttpResponse(about_info)
 
-## 3 4 6 BAD
+## 3 4 6 WORK
 def get_item(request, item_id):
 
     name = ''
@@ -47,7 +47,7 @@ def get_item(request, item_id):
                      <i>Товар с id {item_id}</i><strong> не найден!</strong><br>
                   '''
     go_back = '''
-                 <a href="items/">назад к списку товаров</a>
+                 <a href="/items/">назад к списку товаров</a>
               '''
 
     for item in items:
