@@ -18,13 +18,21 @@ items = [
             {"id": 8, "name": "Кепка Montana" ,"quantity":124},
         ]
 
-
+######################## DAY 1
 
 ## 1 WORK
 def home(request):
-    text = '''<h1>"Изучаем Джанго" </h1>
-               <strong>Автор</strong>: <i>Капущак М.М. </i>'''
-    return HttpResponse(text)
+
+    context = {
+        "name": "Капущак М.М.",
+        "email": "ste1n88@rambler.ru",
+    }
+
+    return render(request, "index.html", context)
+
+#    text = '''<h1>"Изучаем Джанго" </h1>
+#               <strong>Автор</strong>: <i>Капущак М.М. </i>'''
+#    return HttpResponse(text)
 
 ## 2 WORK
 def about(request):
@@ -85,3 +93,11 @@ def get_items(request, ):
     html+='</ol>'
 
     return HttpResponse ( html)
+
+######################## DAY 2
+
+def get_items_list(request, ):
+
+    context = { "items" : items }
+
+    return render(request, "items_list.html", context)
