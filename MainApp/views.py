@@ -81,6 +81,7 @@ def get_items(request, ):
                      </a></li>
                   '''
         html+=product
+
     html+='</ol>'
 
     return HttpResponse ( html)
