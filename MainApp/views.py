@@ -18,25 +18,15 @@ items = [
             {"id": 8, "name": "Кепка Montana" ,"quantity":124},
         ]
 
-#name = ''
-#quantity = ''
-#
-#product = f'''
-#             <i>Название:</i><strong> {name}</strong><br>
-#             <i>Количество:</i><strong> {quantity}</strong><br>
-#          '''
-#product_404 = f'''
-#                 <i>Товар с id {item_id}</i><strong> не найден!</strong><br>
-#              '''
 
 
-## 1
+## 1 WORK
 def home(request):
     text = '''<h1>"Изучаем Джанго" </h1>
                <strong>Автор</strong>: <i>Капущак М.М. </i>'''
     return HttpResponse(text)
 
-## 2
+## 2 WORK
 def about(request):
     about_info = f'''
                     <i>Имя:</i><strong> {f_name}</strong><br>
@@ -47,7 +37,7 @@ def about(request):
                  '''
     return HttpResponse(about_info)
 
-## 3 4
+## 3 4 6 BAD
 def get_item(request, item_id):
 
     name = ''
@@ -60,7 +50,9 @@ def get_item(request, item_id):
     product_404 = f'''
                      <i>Товар с id {item_id}</i><strong> не найден!</strong><br>
                   '''
-
+    go_back = '''
+                 <a href="items/">назад к списку товаров</a>
+              '''
 
     for item in items:
         print (item["id"])
@@ -69,28 +61,26 @@ def get_item(request, item_id):
             name = item["name"]
             quantity = item["quantity"]
             return HttpResponse (product)
-        else:
-            return HttpResponse (product_404)
+#        else:
+        return HttpResponse (product_404)
 
 
-## 5
+## 5 WORK
 def get_items(request, ):
 
     name = ''
     quantity = ''
 
-    product = f'''
-                 <i>Название:</i><strong> {name}</strong><br>
-                 <i>Количество:</i><strong> {quantity}</strong><br>
-              '''
 
-    html = []
+    html = ''
 
     for item in items:
         name = item["name"]
         quantity = item["quantity"]
-        #''.join([html, product,])
+        product = f'''
+                     <i>Название:</i><strong> {name}</strong><br>
+                     <i>Количество:</i><strong> {quantity}</strong><br>
+                  '''
         html+=product
 
-    print (html)
-    return HttpResponse (html)
+    return HttpResponse ( html)
