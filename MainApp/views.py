@@ -70,15 +70,16 @@ def get_items(request, ):
     quantity = ''
 
 
-    html = ''
+    html = '<ol>'
 
     for item in items:
         name = item["name"]
         quantity = item["quantity"]
-        product = f'''
+        product = f'''<li>
                      <i>Название:</i><strong> {name}</strong><br>
-                     <i>Количество:</i><strong> {quantity}</strong><br>
+                     <i>Количество:</i><strong> {quantity}</strong><br></li>
                   '''
         html+=product
+    html+='</ol>'
 
     return HttpResponse ( html)
