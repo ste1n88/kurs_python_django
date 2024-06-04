@@ -75,9 +75,10 @@ def get_items(request, ):
     for item in items:
         name = item["name"]
         quantity = item["quantity"]
-        product = f'''<li>
+        product = f'''<li><a href=/item/{item['id']}
                      <i>Название:</i><strong> {name}</strong><br>
-                     <i>Количество:</i><strong> {quantity}</strong><br></li>
+                     <i>Количество:</i><strong> {quantity}</strong><br>
+                     </a></li>
                   '''
         html+=product
     html+='</ol>'
