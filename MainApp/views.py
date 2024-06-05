@@ -36,14 +36,14 @@ def home(request):
 
 ## 2 WORK
 def about(request):
-    about_info = f'''
-                    <i>Имя:</i><strong> {f_name}</strong><br>
-                    <i>Отчество:</i><strong> {l_name}</strong><br>
-                    <i>Фамилия:</i><strong> {m_name}</strong><br>
-                    <i>телефон:</i><strong> {phone}</strong><br>
-                    <i>email:</i><strong> {email}</strong><br>
-                 '''
-    return HttpResponse(about_info)
+    context_about = {
+                    'f_name': f_name,
+                    'm_name': l_name,
+                    'l_name': m_name,
+                    'phone': phone,
+                    'email': email
+    }
+    return render(request, "about.html", context_about)
 
 ## 3 4 6 WORK
 def get_item(request, item_id):
@@ -60,13 +60,15 @@ def get_item(request, item_id):
 
     for item in items:
         if item["id"] == item_id:
+            id = item["id"]
             name = item["name"]
             quantity = item["quantity"]
-            product = f'''
-                         <i>Название:</i><strong> {name}</strong><br>
-                         <i>Количество:</i><strong> {quantity}</strong><br>
-                      '''
-            return HttpResponse ('%s%s' % (product, go_back) )
+            context = {
+                        'id': id,
+                        "name": name,
+                        'quantity': quantity
+            }
+            return render (request, "item.html", context )
 
     return HttpResponse ('%s%s' % (product_404, go_back) )
 
