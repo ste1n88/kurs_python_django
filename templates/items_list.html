@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Курсы Python3 Django</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
   <h1>Приветствую!</h1>
 
+{% block style %}
+  <style>
+    li{
+        display: inline-block;
+        border: 1px solid blue;
+        padding: 10px 20 px;
+      }
+      a{
+        text-decoration: none;
+        color: green;
+       }
+  </style>
+{% endblock %}
+
+{% block content %}
   <h2> Список Товаров </h2>
 
   <ul>
   {% for item in items   %}
-    <li> <a href="/item/{{ item.id }}"> {{ item.name }}: </a> {{ item.count }} шт.</li>
+    <li> 
+      <a href="{% url 'item'  item.id %}"><u> {{ item.name }}:</u> </a> {{ item.count }} шт. 
+      <br> <br>
+        Описание товара: <i>{{ item.description }}
+    </li>
   {%  endfor %}
   </ul>
 
@@ -21,6 +33,4 @@
 
   <a href="/">На главную</a>
 
-</body>
-{% load static %}
-</html>
+{% endblock %}

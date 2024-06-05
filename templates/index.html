@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Курсы Python3 Django</title>
-</head>
-<body>
 
-  <h1>Приветствую!</h1>
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="demo">Приветствую!</h1>
 
-  <strong> <a href="/">/Home</a>     <a href="/items_list">/Items</a>     <a href="/about">/About</a>  </strong><br><br><br><br>
+  <strong> {% include 'inc-menu.html' %}  </strong><br><br><br><br>
 
   Это главная страница сайт. <br>
   <i>Эта страница пока в разработке</i><br><br><br><br>
 
-  Автор: {{ name }}. <br>
+  <span style='color: blue'> Автор: {{ name }}. </span><br>
   Email для связи: {{ email }}. <br><br><br>
 
   <a href="/items_list/">Список товаров</a>
 
-</body>
-{% load static %}
-</html>
+{% endblock %}
+

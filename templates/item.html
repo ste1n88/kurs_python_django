@@ -1,38 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Курсы Python3 Django</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 
   <h1>Товар:</h1>
 
+  <div class="row">
+  <div  >
+    <div class="row">
+
   {% if quantity  == 0 %}
-
     <strong> Товар "{{ name }}" - отсутствует </strong><br><br><br>
-
   {% else %}
-
     <i>Название: </i><strong> {{ name }}. </strong><br>
-    <i>Количество:</i><strong>  {{ quantity }} шт. </strong><br><br><br>
-
+    <i>Количество:</i><strong>  {{ quantity }} шт. </strong><br><br>
   {% endif %}
 
-  <a href="/items_list/">назад к списку товаров</a>
+    </div>
+    <div >
+      Описание товара: <i>{{ description }}</i>
+    </div>
+  </div><br><br>
+  </div>
 
-</body>
-{% load static %}
-</html>
+  <a href="{% url 'items-list' %}">назад к списку товаров</a>
 
-<!--
-    <header>
-      / <a href="/">/Home</a>  /   <a href="/items_list">/Items</a>  /   <a href="/about">/About</a> /
-    </header>
- 
-    {% if quantity }} -- не надо 
-      <div> Количество: {{ quantity| default:"Товар отсутствует" }} - это типа тернарного оператора ИЛИ\ИЛИ 
-    {% endif %}  -- не надо
-
--->
+{% endblock %}
