@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Курсы Python3 Django</title>
+</head>
+<body>
+
+  <h1>Товар:</h1>
+
+  {% if quantity  == 0 %}
+
+    <strong> Товар "{{ name }}" - отсутствует </strong><br><br><br>
+
+  {% else %}
+
+    <i>Название: </i><strong> {{ name }}. </strong><br>
+    <i>Количество:</i><strong>  {{ quantity }} шт. </strong><br><br><br>
+
+  {% endif %}
+
+  <a href="/items_list/">назад к списку товаров</a>
+
+</body>
+{% load static %}
+</html>

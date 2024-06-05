@@ -13,9 +13,13 @@
 
   <ul>
   {% for item in items   %}
-    <li> {{ item.name }} </li>
+    <li> <a href="/item/{{ item.id }}"> {{ item.name }}: </a> {{ item.quantity }} шт.</li>
   {%  endfor %}
   </ul>
+
+  <br><br><br>
+
+  <a href="/">На главную</a>
 
 </body>
 {% load static %}
