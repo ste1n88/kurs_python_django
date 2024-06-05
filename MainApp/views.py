@@ -33,10 +33,6 @@ def home(request):
 
     return render(request, "index.html", context)
 
-#    text = '''<h1>"Изучаем Джанго" </h1>
-#               <strong>Автор</strong>: <i>Капущак М.М. </i>'''
-#    return HttpResponse(text)
-
 ## 2 WORK
 def about(request):
     context_about = {
@@ -61,9 +57,6 @@ def get_item(request, item_id):
                  <a href="/items/">назад к списку товаров</a>
               '''
 
-#    items = Item.objects.all()
-#    print(items)
-
     try:
         item = Item.objects.get(id=item_id)
     except ObjectDoesNotExist:
@@ -76,21 +69,6 @@ def get_item(request, item_id):
                   'description': item.description,
         }
         return render (request, "item.html", context)
-
-#    for item in items:
-#        if item.id == item_id:
-#            id = item.id
-#            name = item.name
-#            quantity = item.count
-#            context = {
-#                        'id': id,
-#                        "name": name,
-#                        'quantity': quantity
-#            }
-#            return render (request, "item.html", context )
-
-#    return HttpResponse ('%s%s' % (product_404, go_back) )
-
 
 ## 5 WORK
 def get_items(request, ):
