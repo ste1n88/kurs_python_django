@@ -58,7 +58,7 @@ def get_item(request, item_id):
               '''
 
     try:
-        item = Item.objects.get(id=item_id)
+        item = Item.objects.get(pk=item_id)
     except ObjectDoesNotExist:
         return HttpResponse(f'Item with id={item_id} not found')
     else:
