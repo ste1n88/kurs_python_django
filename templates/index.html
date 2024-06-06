@@ -1,6 +1,11 @@
 
 {% extends 'base.html' %}
+
+{% load static %}
+
 {% block content %}
+
+  <img width='50px' src="{% static 'django.svg' %}" alt="Django Image"><br>
   <h1 class="demo">Приветствую!</h1>
 
   <strong> {% include 'inc-menu.html' %}  </strong><br><br><br><br>
