@@ -29,6 +29,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Название</th>
+                        <th scope="col">Язык написания</th>
                         <th scope="col">Дата создания</th>
                     </tr>
                     </thead>
@@ -39,6 +40,7 @@
                     <tr>
                         <td scope="row">{{ snip.id }}</td>
                         <td><a href="{% url 'snip-det' snip.id %}">{{ snip.name }}</a></td>
+                        <td>{{ snip.lang }}</a></td>
                         <td>{{ snip.creation_date }}</td>
                     </tr>
 

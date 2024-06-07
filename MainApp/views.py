@@ -28,10 +28,10 @@ def snippet_detail(request, snip_id):
         return HttpResponse(f'Item with id={snip_id} not found')
     else:
         context = {
-                  'id': snip.id,
-                  "name": snip.name,
-                  'lang': snip.lang,
+                  'pagename': 'Просмотр сниппетов',
+                  'snip': snip,
         }
-        return render (request, "item.html", context)
+        print (context)
+        return render (request, "pages/snippet.html", context)
 
 
