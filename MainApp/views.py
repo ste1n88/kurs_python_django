@@ -86,16 +86,16 @@ def update_snippet(request, snip_id):
         context = {
                   'pagename': 'Редактирование сниппета',
                   'snip': snip,
-                  'type': 'edit',
+                  'type': 'update',
         }
         print (context)
         return render (request, "pages/snippet.html", context)
     if request.method == 'POST':
         form_data = request.POST
-        snippet.name = form_data['field_name']
-        snippet.code = form_data['field_code']
-        snippet.creation_date = form_data['creation_date']
-        snippet.save()
+        snip.name = form_data['field_name']
+        snip.code = form_data['field_code']
+        snip.creation_date = form_data['creation_date']
+        snip.save()
         return redirect('sniplist')
 
 

@@ -44,6 +44,9 @@
                           <a href="{% url 'snip-delete' snip.id %}">
                               <i style="color: red" class="fa-sharp fa-solid fa-trash"></i>
                           </a>
+                          <a href="{% url 'snip-upd' snip.id %}">
+                              <i style="color: green" class="fas  fa-edit"></i>
+                          </a>
                         </td>
                         <td>{{ snip.lang }}</a></td>
                         <td>{{ snip.creation_date }}</td>
