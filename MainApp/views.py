@@ -4,6 +4,22 @@ from MainApp.models import Snippet
 from MainApp.forms import SnippetForm
 
 
+def login_page(request):
+   if request.method == 'POST':
+       username = request.POST.get("username")
+       password = request.POST.get("password")
+       print("username =", username)
+       print("password =", password)
+       user = auth.authenticate(request, username=username, password=password)
+       if user is not None:
+           auth.login(request, user)
+       else:
+           # Return error message
+           pass
+   return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+
 def index_page(request):
     context = {'pagename': 'PythonBin'}
     return render(request, 'pages/index.html', context)
@@ -49,15 +65,38 @@ def snippet_detail(request, snip_id):
         context = {
                   'pagename': 'Просмотр сниппетов',
                   'snip': snip,
+                  'type': 'view',
         }
         print (context)
         return render (request, "pages/snippet.html", context)
 
 def delete_snippet(request, snip_id):
-    print("snip_id: ", snip_id)
+#    print("snip_id: ", snip_id)
     snip = Snippet.objects.get(id=snip_id)
     snip.delete()
     return HttpResponseRedirect( request.META.get('HTTP_REFERER'))
+
+def update_snippet(request, snip_id):
+    try:
+        snip = Snippet.objects.get(id=snip_id)
+    except ObjectDoesNotExist:
+        raise Http404
+
+    if request.method == 'GET':
+        context = {
+                  'pagename': 'Редактирование сниппета',
+                  'snip': snip,
+                  'type': 'edit',
+        }
+        print (context)
+        return render (request, "pages/snippet.html", context)
+    if request.method == 'POST':
+        form_data = request.POST
+        snippet.name = form_data['field_name']
+        snippet.code = form_data['field_code']
+        snippet.creation_date = form_data['creation_date']
+        snippet.save()
+        return redirect('sniplist')
 
 
 #def snippet_create(request, ):
