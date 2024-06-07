@@ -31,6 +31,7 @@
                         <th scope="col">Название</th>
                         <th scope="col">Язык написания</th>
                         <th scope="col">Дата создания</th>
+                        <th scope="col">Удалить</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,9 +40,14 @@
 
                     <tr>
                         <td scope="row">{{ snip.id }}</td>
-                        <td><a href="{% url 'snip-det' snip.id %}">{{ snip.name }}</a></td>
+                        <td><a href="{% url 'snip-det' snip.id %}">{{ snip.name }}</a>
+                          <a href="{% url 'snip-delete' snip.id %}">
+                              <i style="color: red" class="fa-sharp fa-solid fa-trash"></i>
+                          </a>
+                        </td>
                         <td>{{ snip.lang }}</a></td>
                         <td>{{ snip.creation_date }}</td>
+                        <td><a href="{% url 'snip-delete' snip.id %}">Удалить</a></td>
                     </tr>
 
                     {% endfor %}

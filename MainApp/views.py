@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm
@@ -42,7 +42,7 @@ def snippets_page(request):
 
 def snippet_detail(request, snip_id):
     try:
-        snip = Snippet.objects.get(pk=snip_id)
+        snip = Snippet.objects.get(id=snip_id)
     except ObjectDoesNotExist:
         return HttpResponse(f'Item with id={snip_id} not found')
     else:
@@ -52,6 +52,13 @@ def snippet_detail(request, snip_id):
         }
         print (context)
         return render (request, "pages/snippet.html", context)
+
+def delete_snippet(request, snip_id):
+    print("snip_id: ", snip_id)
+    snip = Snippet.objects.get(id=snip_id)
+    snip.delete()
+    return HttpResponseRedirect( request.META.get('HTTP_REFERER'))
+
 
 #def snippet_create(request, ):
 #    if request.method == 'POST':
