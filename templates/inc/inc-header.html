@@ -27,7 +27,7 @@
 
             {% if request.user.is_authenticated %}
               <span style="color: white">Wilcommen, {{ request.user.username }} ! </span>
-                <a href="{% url 'logout' %}"> Logout</a>
+              <a href="{% url 'logout' %}"> Logout</a>
             {% else %}
 
               <div class="navbar-nav mr-right nav-item dropdown dropdown-menu-right">
@@ -47,7 +47,13 @@
                      <div class="dropdown-divider"></div>
                  </div>
               </div>
+              {% if errors %}
 
+                {% for error in errors %}
+                  <li style="color: red"> {{ error }} </li>
+                {% endfor %}
+
+              {% endif %}
 
             {% endif %}
 
