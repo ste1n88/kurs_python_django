@@ -2,12 +2,13 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import auth
 
-
-def login_page(request):
+def login(request):
    if request.method == 'POST':
-       username = request.POST.get("username")
-       password = request.POST.get("password")
+       username = request.POST.get("field_user")
+       password = request.POST.get("field_pass")
        print("username =", username)
        print("password =", password)
        user = auth.authenticate(request, username=username, password=password)
@@ -16,9 +17,12 @@ def login_page(request):
        else:
            # Return error message
            pass
-   return redirect(request.META.get('HTTP_REFERER', '/'))
+   return redirect('home')
+   #return redirect(request.META.get('HTTP_REFERER', '/'))
 
-
+def logout(request):
+    auth.logout(request)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 def index_page(request):
     context = {'pagename': 'PythonBin'}
@@ -35,14 +39,16 @@ def add_snippet_page(request):
         context = {
                    'pagename': 'Просмотр сниппетов',
                    'form': form,
-
         }
         return render(request, 'pages/add_snippet.html', context)
 
     if request.method == 'POST':    # Если хотим создать новую запись
         form = SnippetForm(request.POST)
         if form.is_valid():
-            form.save()
+            snip = form.save(commit=False)    # чтобы не было двойных коммитов: Сохрани, но не записывай в БД
+            if request.user.is_authenticated:
+                snip.user = request.user    # Сохранение сниппета с полем User
+                snip.save() 
             return redirect('sniplist')
         return render(request, 'pages/add_snippet.html', {'form': form} )
 

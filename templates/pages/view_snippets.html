@@ -31,6 +31,7 @@
                         <th scope="col">Название</th>
                         <th scope="col">Язык написания</th>
                         <th scope="col">Дата создания</th>
+                        <th scope="col">Пользователь</th>
                         <th scope="col">Удалить</th>
                     </tr>
                     </thead>
@@ -50,6 +51,7 @@
                         </td>
                         <td>{{ snip.lang }}</a></td>
                         <td>{{ snip.creation_date }}</td>
+                        <td>{{ snip.user.username }}</td>
                         <td><a href="{% url 'snip-delete' snip.id %}">Удалить</a></td>
                     </tr>
 
