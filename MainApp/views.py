@@ -27,7 +27,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    return redirect('home')
 
 def index_page(request):
     context = {'pagename': 'PythonBin'}
@@ -58,6 +58,14 @@ def add_snippet_page(request):
             return redirect('sniplist')
         return render(request, 'pages/add_snippet.html', {'form': form} )
 
+@login_required
+def show_my_snippets(request):
+    context = {
+               'pagename': 'Мои сниппеты',
+    }
+    snippets = Snippet.objects.filter(user=request.user)
+    context['snippets'] = snippets
+    return render(request, 'pages/view_snippets.html', context)
 
 def snippets_page(request):
     snippets = Snippet.objects.all()
