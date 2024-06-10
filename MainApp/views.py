@@ -4,6 +4,7 @@ from MainApp.models import Snippet
 from MainApp.forms import SnippetForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 def login(request):
    if request.method == 'POST':
@@ -37,6 +38,7 @@ def index_page(request):
 #    context = {'pagename': 'Добавление нового сниппета'}
 #    return render(request, 'pages/add_snippet.html', context)
 
+@login_required
 def add_snippet_page(request):
     if request.method == 'GET':    # Получить пустую форму для заполнения
         form = SnippetForm()
