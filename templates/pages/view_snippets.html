@@ -33,7 +33,6 @@
                         <th scope="col">Дата создания</th>
                         <th scope="col">Пользователь</th>
                         <th scope="col">Публичный</th>
-                        <th scope="col">Удалить</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,22 +42,23 @@
                     <tr>
                         <td scope="row">{{ snip.id }}</td>
                         <td><a href="{% url 'snip-det' snip.id %}">{{ snip.name }}</a>
+                          {% if request.user == snip.user %}
                           <a href="{% url 'snip-delete' snip.id %}">
                               <i style="color: red" class="fa-sharp fa-solid fa-trash"></i>
                           </a>
                           <a href="{% url 'snip-upd' snip.id %}">
                               <i style="color: green" class="fas  fa-edit"></i>
                           </a>
+                          {% endif %}
                         </td>
                         <td>{{ snip.lang }}</a></td>
                         <td>{{ snip.creation_date }}</td>
                         <td>{{ snip.user.username }}</td>
-                        {% if not snippet.public %}
-                          <td>Публичный</td>
+                        {% if not snip.public %}
+                          <td>Частный</td>
                         {% else %}
-                          <td>Приватный</td>
+                          <td>Общий</td>
                         {% endif %}
-                        <td><a href="{% url 'snip-delete' snip.id %}">Удалить</a></td>
                     </tr>
 
                     {% endfor %}

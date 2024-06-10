@@ -1,10 +1,27 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
-from MainApp.forms import SnippetForm
+from MainApp.forms import SnippetForm, UserRegistrationForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+
+def create_user(request):
+    context = {
+               'pagename': 'Регистрация пользователя',
+    }
+
+    if request.method == 'GET':
+        form = UserRegistrationForm()
+        context['form'] = form    # Добавляем форму к словарю контекста
+        return render(request, 'pages/registration.html', context)
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        context['form'] = form 
+        return render(request, 'pages/registration.html', context)
 
 def login(request):
    if request.method == 'POST':
@@ -68,7 +85,8 @@ def show_my_snippets(request):
     return render(request, 'pages/view_snippets.html', context)
 
 def snippets_page(request):
-    snippets = Snippet.objects.all()
+    #snippets = Snippet.objects.all()
+    snippets = Snippet.objects.filter(public=True)
     context = {
                'pagename': 'Просмотр сниппетов',
                'snippets': snippets,
@@ -89,6 +107,7 @@ def snippet_detail(request, snip_id):
         }
         print (context)
         return render (request, "pages/snippet.html", context)
+
 
 def delete_snippet(request, snip_id):
 #    print("snip_id: ", snip_id)
@@ -115,7 +134,11 @@ def update_snippet(request, snip_id):
         snip.name = form_data['field_name']
         snip.code = form_data['field_code']
         snip.creation_date = form_data['creation_date']
-        snip.save()
+        snip.public = form_data.get('chck_public', False)    # Если True, то вернём значение, иначе False
+        try:
+            snip.save()
+        except Exception as e:
+            print (e)
         return redirect('sniplist')
 
 
