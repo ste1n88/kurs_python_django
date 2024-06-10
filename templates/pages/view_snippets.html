@@ -32,6 +32,7 @@
                         <th scope="col">Язык написания</th>
                         <th scope="col">Дата создания</th>
                         <th scope="col">Пользователь</th>
+                        <th scope="col">Публичный</th>
                         <th scope="col">Удалить</th>
                     </tr>
                     </thead>
@@ -52,6 +53,11 @@
                         <td>{{ snip.lang }}</a></td>
                         <td>{{ snip.creation_date }}</td>
                         <td>{{ snip.user.username }}</td>
+                        {% if not snippet.public %}
+                          <td>Публичный</td>
+                        {% else %}
+                          <td>Приватный</td>
+                        {% endif %}
                         <td><a href="{% url 'snip-delete' snip.id %}">Удалить</a></td>
                     </tr>
 
